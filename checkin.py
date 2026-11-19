@@ -359,6 +359,21 @@ def process_account(account, solver):
             f"💰 当前余额: {balance_after}$\n"
             f"⏱️ 签到时间: {now}"
         )
+    elif "mini-program" in msg or "小程序" in msg:
+        # 站点已于 2026-11 将签到奖励迁移到微信小程序答题（API 路径不再发奖励）：
+        # 微信搜索小程序《重生之这一世我要好好学人工智能》答题拿兑换码，
+        # 回站内「钱包」页兑换，每天最多 1 万额度。这里转为每日提醒，不算失败。
+        print(f"{tag}ℹ️ 签到奖励已迁移至微信小程序答题，需人工完成", flush=True)
+        message = (
+            f"🎁 iamhc 签到通知\n\n"
+            f"ℹ️ {label}({username}) 今日签到需人工完成：\n"
+            f"微信搜索小程序《重生之这一世我要好好学人工智能》答题拿兑换码"
+            f"（一天可答 10 次），回站内「钱包」页兑换，每天最高 1 万额度。\n"
+            f"💰 当前余额: {balance_after}$\n"
+            f"⏱️ 时间: {now}"
+        )
+        send_notification(message)
+        return True
     else:
         print(f"{tag}❌ 签到失败 | {msg}", flush=True)
         message = (
